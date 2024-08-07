@@ -93,18 +93,18 @@ def visualization():
     st.write("In the Visualization section, we present a series of graphics that offer a visual interpretation of the data, helping to illuminate key trends and patterns. These visuals provide a deeper understanding of the our dataset.")
 
     st.title("Surface temperature anomaly variation over the years (globally)")
-    image = Image.open("C:\\Users\\gabri\\Desktop\\Project_WT\\Project_WT\\images\\Surface temperature anomaly variation over the years (globally).png")
+    image = Image.open("Surface temperature anomaly variation over the years (globally).png")
     st.image(image)
     """
     The chart shows the average surface temperature anomaly over the years. We observe an upward trend in temperature anomalies from 1850 to the present day. In the years before 1900, temperature anomalies were variable and often below zero, indicating cooler temperatures compared to the reference average. Starting from the mid-20th century, there is a gradual and consistent increase in temperature anomalies, with a significant acceleration in recent decades. This suggests an increasingly pronounced global warming trend.
       """
     st.title("How the Surface temperature anomaly changed across the years per continent")
-    image = Image.open("C:\\Users\\gabri\\Desktop\\Project_WT\\Project_WT\\images\\How the Surface temperature anomaly changed across the years per continent.png")
+    image = Image.open("How the Surface temperature anomaly changed across the years per continent.png")
     st.image(image)
     
 
     st.title("Box Plot of Surface Temperature Anomaly by Continent")
-    image = Image.open("C:\\Users\\gabri\\Desktop\\Project_WT\\Project_WT\\images\\Box Plot of Surface Temperature Anomaly by Continent.png")
+    image = Image.open("Box Plot of Surface Temperature Anomaly by Continent.png")
     st.image(image)
     """
     The box plot chart shows the distribution of surface temperature anomalies for each continent. Here are some observations:
@@ -117,7 +117,7 @@ def visualization():
     This analysis helps in understanding the regional differences in temperature anomaly distributions across different continents.
         """
     st.title("Temperature change over the years by continents")
-    image = Image.open("C:\\Users\\gabri\\Desktop\\Project_WT\\Project_WT\\images\\temperature change over the years by continents.png")
+    image = Image.open("temperature change over the years by continents.png")
     st.image(image)
 
     """ The chart shows the average temperature change over the years, divided by continent. We can observe that:
@@ -129,7 +129,7 @@ def visualization():
     Overall, all continents show a warming trend, with differences in the magnitude and period of warming acceleration.
         """
     st.title("Pie Chart: Reasons for temperature rise")
-    image = Image.open("C:\\Users\\gabri\\Desktop\\Project_WT\\Project_WT\\images\\reasons for temperature rise.png")
+    image = Image.open("reasons for temperature rise.png")
     st.image(image)
 
     """
@@ -139,7 +139,7 @@ def visualization():
         """
 
     st.title("Line Plot of tot CO2 emission by Top 5 Countries")
-    image = Image.open("C:\\Users\\gabri\\Desktop\\Project_WT\\Project_WT\\images\\Line Plot of tot CO2 emission by Top 5 Countries.png")
+    image = Image.open("Line Plot of tot CO2 emission by Top 5 Countries.png")
     st.image(image)
 
     """
