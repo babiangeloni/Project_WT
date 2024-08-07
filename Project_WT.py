@@ -2,11 +2,6 @@ import streamlit as st
 import pandas as pd 
 import pickle
 import numpy as np
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
-import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.graph_objects as go
 import plotly.express as px
@@ -14,8 +9,6 @@ from io import StringIO
 import requests
 from io import BytesIO
 from PIL import Image
-from scipy.stats import normaltest
-from scipy.stats import norm
 from PIL import Image
 
 # Function to display the cover image and course information
