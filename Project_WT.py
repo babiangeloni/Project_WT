@@ -19,11 +19,6 @@ from scipy.stats import normaltest
 from scipy.stats import norm
 from PIL import Image
 
-
-# Load the dataset
-dfco2 = pd.read_csv('C:/Users/gabri/Desktop/Project_WT/Project_WT/Streamlit/a)df_project_without_nan.csv')
-print(dfco2)
-
 # Function to display the cover image and course information
 def display_header():
     # Display the cover image
