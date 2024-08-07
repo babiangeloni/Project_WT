@@ -268,7 +268,7 @@ def modeling():
         image_hr = Image.open("hist_res.png")
         st.image(image_hr)
     
-    st.info("Based on the provided metrics and analysis, the **Random Forest Regressor** was the best-performing model for predicting surface temperature anomaly in this dataset, therefore is the one that we selected to build our Machine Learning model to predict the surface temperature anomaly. Below it is possible to see the results also of some visual analysis about the Feature Importances and Residuals")
+    st.info("Based on the provided metrics and analysis, the **Random Forest Regressor** was the best-performing model for predicting surface temperature anomaly in this dataset, therefore is the one that we selected to build our Machine Learning model to predict the surface temperature anomaly.")
  
 
 
