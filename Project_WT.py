@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd 
 import pickle
 import numpy as np
-from scipy import stats
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
