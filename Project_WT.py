@@ -33,7 +33,7 @@ def display_header():
 
 
     # Caption with course and group information
-    st.caption("""**Course** : Data Analyst
+    st.caption("""**Course** : Data Ana
     | **Training** : Bootcamp
     | **Cohort** : June 2024
     | **Group** : Annalisa SAFFIOTI,  Gabriela ANGELONI
