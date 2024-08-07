@@ -256,7 +256,6 @@ def modeling():
 
 ##### PREDICTION SECTION
 
-# Function to load the trained model
 def load_model():
     with open('model.pkl', 'rb') as model_file:
         model = pickle.load(model_file)
@@ -286,9 +285,22 @@ def prediction():
     st.write("The Random Forest is an ensemble learning method that combines multiple decision trees to improve the model’s accuracy and robustness. Each tree in the forest is built from a random subset of the data and features, and the final prediction is made by averaging the predictions of all individual trees.")
     st.info("Our model was fine-tuned using GridSearchCV to optimise its hyperparameters and improve performance.")
 
-    # Sliders to capture input values for each feature
-    continent = st.slider('Continent', min_value=0.0, max_value=5.0, value=0.0, step=1.0)
+# Droplist for continent
+    continent_mapping = {
+    0: 'Africa',
+    1: 'Asia',
+    2: 'Europe',
+    3: 'North America',
+    4: 'Oceania',
+    5: 'South America'
+}
+    continent_name = st.selectbox('Continent', list(continent_mapping.values()))
+    continent = list(continent_mapping.keys())[list(continent_mapping.values()).index(continent_name)]
+# Text input for country
     country = st.slider('Country', min_value=0.0, max_value=190.0, value=0.0, step=1.0)
+       
+    
+# Sliders to capture input values for each feature
     year = st.slider('Year', min_value=1851, max_value=2017, value=2020, step=1)  # Treated as an integer
     population = st.slider('Population', min_value=3187.0, max_value=1410275968.0, value=1000000.0)
     temperature_change_tot = st.slider('Total Temperature Change', min_value=-0.002, max_value=0.541, value=0.0)
@@ -300,11 +312,9 @@ def prediction():
 
     # Generate prediction when the button is clicked
     if st.button('Predict Surface Temperature'):
-        features = get_features(continent, country, year, population, temperature_change_tot, temperature_change_from_ch4, temperature_change_from_co2, temperature_change_from_ghg, temperature_change_from_n2o, co2)
+        features = get_features(continent, float(country), year, population, temperature_change_tot, temperature_change_from_ch4, temperature_change_from_co2, temperature_change_from_ghg, temperature_change_from_n2o, co2)
         prediction = predict_surface_temperature(features)
         st.write(f"The predicted surface temperature is: {prediction[0]}°C")
-
-
 
 ####### PREDICTION
 
