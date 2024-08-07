@@ -2,10 +2,6 @@ import streamlit as st
 import pandas as pd 
 import pickle
 import numpy as np
-from io import StringIO
-import requests
-from io import BytesIO
-from PIL import Image
 from PIL import Image
 
 # Function to display the cover image and course information
