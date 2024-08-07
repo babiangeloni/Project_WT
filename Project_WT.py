@@ -251,7 +251,7 @@ def modeling():
         
         st.write("- The **Histogram of Residuals** confirms that the Random Forest model performs well, with a good distribution of residuals around zero.")
 
-st.info("Based on the provided metrics and analysis, the **Random Forest Regressor** was the best-performing model for predicting surface temperature anomaly in this dataset, therefore is the one that we selected to build our Machine Learning model to predict the surface temperature anomaly.")
+        st.info("Based on the provided metrics and analysis, the **Random Forest Regressor** was the best-performing model for predicting surface temperature anomaly in this dataset, therefore is the one that we selected to build our Machine Learning model to predict the surface temperature anomaly.")
 
 
 ##### PREDICTION SECTION
