@@ -97,7 +97,6 @@ def data_exploration():
                 """
                 - **Volume**: 285 rows and 4 columns
                 - **Description**: This dataset provided information about countries and continents, with the year value being 2015
-                - **Interesting variables**: different sources from CO2, temperature change, population, gdp
                 - **Missing values**: The dataset included 285 countries with no missing values
 
                 """
