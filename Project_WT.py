@@ -87,69 +87,121 @@ def data_exploration():
                 st.image(image)
 
 
+def data_exploration():
+   display_header() 
+   st.title("🔎 Data Exploration")
+   st.info("To achieve the objectives of this project, we utilized three primary datasets. Below, we present key insights derived from these datasets, covering various aspects of global warming, CO₂ emissions, and the results of our data audit.")
+  
+   # DF1
+   """This project utilizes three main datasets:"""
+
+
+   with st.expander("**OWID CO2 Data**"):
+           """
+              - **Volume**: 47,415 rows and 79 columns
+               - **Description**: Included comprehensive data on CO₂ emissions and other greenhouse gases, such as methane, for various countries.
+               - **Interesting variables**: different sources from CO2, temperature change, population, gdp.
+               - **Missing values**: More than 50% of the columns of the original dataset presented missing values.
+               """
+           """
+               Preview of the OWID CO2 Data File:
+           """
+           image = Image.open("DF1 HEAD.png")
+           st.image(image)
+
+
+   # DF2
+   with st.expander("**Our World in Data: HADCRUT Surface Temperature Anomaly**"):
+               """
+               - **Volume**:  29,566 rows and 4 columns
+               - **Description**: Contained surface temperature anomaly data from 1880 to the present.
+               - **Missing values**: There is no missing values for surface temperature anomaly data.
+               """
+
+
+               """
+               Preview of the HADCRUT Surface Temperature Anomaly File:
+               """
+               image = Image.open("DF2 HEAD.png")
+               st.image(image)
+
+
+   # DF4
+   with st.expander("**Our World in Data: Continents**"):
+               """
+               - **Volume**: 285 rows and 4 columns
+               - **Description**: This dataset provided information about countries and continents, with the year value being 2015.
+               - **Missing values**: The dataset included 285 countries with no missing values.
+               """
+               """
+               Preview of the Our World in Data: Continents File:
+               """
+
+
+               image = Image.open("DF3 HEAD.png")
+               st.image(image)
+
+
+
+
 def visualization():
-    display_header()  
-    st.title("🌏 Visualization")
-    st.write("In the Visualization section, we present a series of graphics that offer a visual interpretation of the data, helping to illuminate key trends and patterns. These visuals provide a deeper understanding of the our dataset.")
+   display_header() 
+   st.title("🌏 Visualization")
+   st.write("In the Visualization section, we present a series of graphics that offer a visual interpretation of the data, helping to illuminate key trends and patterns. These visuals provide a deeper understanding of the our dataset.")
 
-    st.title("Surface temperature anomaly variation over the years (globally)")
-    image = Image.open("Surface temperature anomaly variation over the years (globally).png")
-    st.image(image)
-    """
-    The chart shows the average surface temperature anomaly over the years. We observe an upward trend in temperature anomalies from 1850 to the present day. In the years before 1900, temperature anomalies were variable and often below zero, indicating cooler temperatures compared to the reference average. Starting from the mid-20th century, there is a gradual and consistent increase in temperature anomalies, with a significant acceleration in recent decades. This suggests an increasingly pronounced global warming trend.
-      """
-    st.title("How the Surface temperature anomaly changed across the years per continent")
-    image = Image.open("How the Surface temperature anomaly changed across the years per continent.png")
-    st.image(image)
-    
+   st.header("Surface temperature anomaly variation over the years (globally)")
+   image = Image.open("Surface temperature anomaly variation over the years (globally).png")
+   st.image(image)
+   """
+   The chart shows the average surface temperature anomaly over the years. We observe an upward trend in temperature anomalies from 1850 to the present day. In the years before 1900, temperature anomalies were variable and often below zero, indicating cooler temperatures compared to the reference average. Starting from the mid-20th century, there is a gradual and consistent increase in temperature anomalies, with a significant acceleration in recent decades. This suggests an increasingly pronounced global warming trend.
+     """
+   st.header("How the Surface temperature anomaly changed across the years per continent")
+   image = Image.open("How the Surface temperature anomaly changed across the years per continent.png")
+   st.image(image)
+  
+   st.header("Box Plot of Surface Temperature Anomaly by Continent")
+   image = Image.open("Box Plot of Surface Temperature Anomaly by Continent.png")
+   st.image(image)
+   """
+   The box plot chart shows the distribution of surface temperature anomalies for each continent. Here are some observations:
+   - Europe and Asia show higher temperature anomalies, with slightly higher medians compared to other continents.
+   - Africa has a distribution more centered around zero, indicating less extreme variations in temperature anomalies.
+   - North America and South America show a wider distribution with more outliers, indicating greater variability in temperature anomalies.
+   - Oceania shows a distribution similar to Africa, with temperature anomalies mostly close to zero, but with some significant outliers.
 
-    st.title("Box Plot of Surface Temperature Anomaly by Continent")
-    image = Image.open("Box Plot of Surface Temperature Anomaly by Continent.png")
-    st.image(image)
-    """
-    The box plot chart shows the distribution of surface temperature anomalies for each continent. Here are some observations:
+   This analysis helps in understanding the regional differences in temperature anomaly distributions across different continents.
+       """
+   st.header("Temperature change over the years by continents")
+   image = Image.open("temperature change over the years by continents.png")
+   st.image(image)
+   """ The chart shows the average temperature change over the years, divided by continent. We can observe that:
+   - North America exhibits a significant increase in average temperature starting from the mid-19th century, with accelerated growth beginning in the 1950s.
+   - Europe and Asia follow a similar pattern, with a steady increase in average temperature over time.
+   - South America, Africa, and Oceania show less pronounced but still noticeable increases.
 
-    - Europe and Asia show higher temperature anomalies, with slightly higher medians compared to other continents.
-    - Africa has a distribution more centered around zero, indicating less extreme variations in temperature anomalies.
-    - North America and South America show a wider distribution with more outliers, indicating greater variability in temperature anomalies.
-    - Oceania shows a distribution similar to Africa, with temperature anomalies mostly close to zero, but with some significant outliers.
+   Overall, all continents show a warming trend, with differences in the magnitude and period of warming acceleration.
+       """
+   st.header("Pie Chart: Reasons for temperature rise")
+   image = Image.open("reasons for temperature rise.png")
+   st.image(image)
+   """
+   CO2: Significant focus for climate mitigation efforts due to its substantial contribution.
+   Methane (CH4): Important to address due to its high warming potential, especially in agriculture and fossil fuels.
+   N2O: Requires attention despite smaller contribution, particularly in agriculture.
+       """
 
-    This analysis helps in understanding the regional differences in temperature anomaly distributions across different continents.
-        """
-    st.title("Temperature change over the years by continents")
-    image = Image.open("temperature change over the years by continents.png")
-    st.image(image)
+   st.header("Line Plot of tot CO2 emission by Top 5 Countries")
+   image = Image.open("Line Plot of tot CO2 emission by Top 5 Countries.png")
+   st.image(image)
+   """
+   The graph shows CO2 emissions over the years for the top 5 countries:
+   - China: Rapid increase starting in the late 1990s, becoming the highest emitter due to rapid industrialization.
+   - United States: Steady rise from the late 19th century, peaking around 2000, then slightly declining.
+   - Russia: Increase from the early 20th century, with significant rises post-1990.
+   - Germany: Steady increase until the 1970s, followed by a decline due to environmental regulations.
+   - United Kingdom: Early rise peaking mid-20th century, then a gradual decline.
+   """
 
-    """ The chart shows the average temperature change over the years, divided by continent. We can observe that:
-
-    - North America exhibits a significant increase in average temperature starting from the mid-19th century, with accelerated growth beginning in the 1950s.
-    - Europe and Asia follow a similar pattern, with a steady increase in average temperature over time.
-    - South America, Africa, and Oceania show less pronounced but still noticeable increases.
-
-    Overall, all continents show a warming trend, with differences in the magnitude and period of warming acceleration.
-        """
-    st.title("Pie Chart: Reasons for temperature rise")
-    image = Image.open("reasons for temperature rise.png")
-    st.image(image)
-
-    """
-    CO2: Significant focus for climate mitigation efforts due to its substantial contribution.
-    Methane (CH4): Important to address due to its high warming potential, especially in agriculture and fossil fuels.
-    N2O: Requires attention despite smaller contribution, particularly in agriculture.
-        """
-
-    st.title("Line Plot of tot CO2 emission by Top 5 Countries")
-    image = Image.open("Line Plot of tot CO2 emission by Top 5 Countries.png")
-    st.image(image)
-
-    """
-    The graph shows CO2 emissions over the years for the top 5 countries:
-    - China: Rapid increase starting in the late 1990s, becoming the highest emitter due to rapid industrialization.
-    - United States: Steady rise from the late 19th century, peaking around 2000, then slightly declining.
-    - Russia: Increase from the early 20th century, with significant rises post-1990.
-    - Germany: Steady increase until the 1970s, followed by a decline due to environmental regulations.
-    - United Kingdom: Early rise peaking mid-20th century, then a gradual decline.
-    """
 
 
 def modeling():
@@ -199,8 +251,7 @@ def modeling():
         
         st.write("- The **Histogram of Residuals** confirms that the Random Forest model performs well, with a good distribution of residuals around zero.")
 
-    st.info("Based on the provided metrics and analysis, the **Random Forest Regressor** was the best-performing model for predicting surface temperature anomaly in this dataset, therefore is the one that we selected to build our Machine Learning model to predict the surface temperature anomaly. Below it is possible to see the results also of some visual analysis about the Feature Importances and Residuals")
-
+st.info("Based on the provided metrics and analysis, the **Random Forest Regressor** was the best-performing model for predicting surface temperature anomaly in this dataset, therefore is the one that we selected to build our Machine Learning model to predict the surface temperature anomaly.")
 
 
 ##### PREDICTION SECTION
