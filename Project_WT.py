@@ -55,7 +55,7 @@ def data_exploration():
             """
                 Preview of the OWID CO2 Data File: 
             """
-            image = Image.open("DF1 HEAD.png")
+            image = Image.open("df1.png")
             st.image(image)
 
     # DF2
@@ -69,7 +69,7 @@ def data_exploration():
                 """
                 Preview of the HADCRUT Surface Temperature Anomaly File:
                 """
-                image = Image.open("DF2 HEAD.png")
+                image = Image.open("df2.png")
                 st.image(image)
 
     # DF4
@@ -83,7 +83,7 @@ def data_exploration():
                 Preview of the Our World in Data: Continents File:
                 """
 
-                image = Image.open("DF3 HEAD.png")
+                image = Image.open("df3.png")
                 st.image(image)
 
 
