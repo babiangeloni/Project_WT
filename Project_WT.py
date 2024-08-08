@@ -4,9 +4,7 @@ import pickle
 import numpy as np
 from PIL import Image
 
-# Function to display the cover image and course information
 def display_header():
-    # Display the cover image
     image = Image.open("Surface world Temperature Analysis.png")
     st.image(image)
 
@@ -86,64 +84,6 @@ def data_exploration():
                 image = Image.open("df3.png")
                 st.image(image)
 
-
-def data_exploration():
-   display_header() 
-   st.title("🔎 Data Exploration")
-   st.info("To achieve the objectives of this project, we utilized three primary datasets. Below, we present key insights derived from these datasets, covering various aspects of global warming, CO₂ emissions, and the results of our data audit.")
-  
-   # DF1
-   """This project utilizes three main datasets:"""
-
-
-   with st.expander("**OWID CO2 Data**"):
-           """
-              - **Volume**: 47,415 rows and 79 columns
-               - **Description**: Included comprehensive data on CO₂ emissions and other greenhouse gases, such as methane, for various countries.
-               - **Interesting variables**: different sources from CO2, temperature change, population, gdp.
-               - **Missing values**: More than 50% of the columns of the original dataset presented missing values.
-               """
-           """
-               Preview of the OWID CO2 Data File:
-           """
-           image = Image.open("DF1 HEAD.png")
-           st.image(image)
-
-
-   # DF2
-   with st.expander("**Our World in Data: HADCRUT Surface Temperature Anomaly**"):
-               """
-               - **Volume**:  29,566 rows and 4 columns
-               - **Description**: Contained surface temperature anomaly data from 1880 to the present.
-               - **Missing values**: There is no missing values for surface temperature anomaly data.
-               """
-
-
-               """
-               Preview of the HADCRUT Surface Temperature Anomaly File:
-               """
-               image = Image.open("DF2 HEAD.png")
-               st.image(image)
-
-
-   # DF4
-   with st.expander("**Our World in Data: Continents**"):
-               """
-               - **Volume**: 285 rows and 4 columns
-               - **Description**: This dataset provided information about countries and continents, with the year value being 2015.
-               - **Missing values**: The dataset included 285 countries with no missing values.
-               """
-               """
-               Preview of the Our World in Data: Continents File:
-               """
-
-
-               image = Image.open("DF3 HEAD.png")
-               st.image(image)
-
-
-
-
 def visualization():
    display_header() 
    st.title("🌏 Visualization")
@@ -202,10 +142,8 @@ def visualization():
    - United Kingdom: Early rise peaking mid-20th century, then a gradual decline.
    """
 
-
-
 def modeling():
-    display_header()  # Call the function to display the header content
+    display_header()  
     st.title("🧩 Modelling")
     st.info("Our goal: to identify the best performing machine learning model for predicting surface temperature anomalies using various regression techniques.")
 
@@ -361,7 +299,6 @@ def prediction():
         features = get_features(continent, country_encoded, year, population, temperature_change_tot, temperature_change_from_ch4, temperature_change_from_co2, temperature_change_from_ghg, temperature_change_from_n2o, co2)
         prediction = predict_surface_temperature(features)
         st.write(f"The predicted surface temperature is: {prediction[0]}°C")
-
 
 
 ####### PREDICTION
