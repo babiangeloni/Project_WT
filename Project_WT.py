@@ -3,6 +3,8 @@ import pandas as pd
 import pickle
 import numpy as np
 from PIL import Image
+import plotly.express as px
+import plotly.graph_objects as go
 
 # Function to display the cover image and course information
 def display_header():
@@ -87,120 +89,93 @@ def data_exploration():
                 st.image(image)
 
 
-def data_exploration():
-   display_header() 
-   st.title("🔎 Data Exploration")
-   st.info("To achieve the objectives of this project, we utilized three primary datasets. Below, we present key insights derived from these datasets, covering various aspects of global warming, CO₂ emissions, and the results of our data audit.")
-  
-   # DF1
-   """This project utilizes three main datasets:"""
-
-
-   with st.expander("**OWID CO2 Data**"):
-           """
-              - **Volume**: 47,415 rows and 79 columns
-               - **Description**: Included comprehensive data on CO₂ emissions and other greenhouse gases, such as methane, for various countries.
-               - **Interesting variables**: different sources from CO2, temperature change, population, gdp.
-               - **Missing values**: More than 50% of the columns of the original dataset presented missing values.
-               """
-           """
-               Preview of the OWID CO2 Data File:
-           """
-           image = Image.open("DF1 HEAD.png")
-           st.image(image)
-
-
-   # DF2
-   with st.expander("**Our World in Data: HADCRUT Surface Temperature Anomaly**"):
-               """
-               - **Volume**:  29,566 rows and 4 columns
-               - **Description**: Contained surface temperature anomaly data from 1880 to the present.
-               - **Missing values**: There is no missing values for surface temperature anomaly data.
-               """
-
-
-               """
-               Preview of the HADCRUT Surface Temperature Anomaly File:
-               """
-               image = Image.open("DF2 HEAD.png")
-               st.image(image)
-
-
-   # DF4
-   with st.expander("**Our World in Data: Continents**"):
-               """
-               - **Volume**: 285 rows and 4 columns
-               - **Description**: This dataset provided information about countries and continents, with the year value being 2015.
-               - **Missing values**: The dataset included 285 countries with no missing values.
-               """
-               """
-               Preview of the Our World in Data: Continents File:
-               """
-
-
-               image = Image.open("DF3 HEAD.png")
-               st.image(image)
-
-
 def visualization():
-   display_header() 
+   display_header()
    st.title("🌏 Visualization")
    st.write("In the Visualization section, we present a series of graphics that offer a visual interpretation of the data, helping to illuminate key trends and patterns. These visuals provide a deeper understanding of the our dataset.")
-
-   st.header("Surface temperature anomaly variation over the years (globally)")
-   image = Image.open("Surface temperature anomaly variation over the years (globally).png")
-   st.image(image)
-   """
-   The chart shows the average surface temperature anomaly over the years. We observe an upward trend in temperature anomalies from 1850 to the present day. In the years before 1900, temperature anomalies were variable and often below zero, indicating cooler temperatures compared to the reference average. Starting from the mid-20th century, there is a gradual and consistent increase in temperature anomalies, with a significant acceleration in recent decades. This suggests an increasingly pronounced global warming trend.
-     """
-   st.header("How the Surface temperature anomaly changed across the years per continent")
-   image = Image.open("How the Surface temperature anomaly changed across the years per continent.png")
-   st.image(image)
   
+   # Load CSV file
+   df = pd.read_csv('df_project.csv')
+
+    # 1) Average Surface temperature Anomaly Over the Years
+   st.header("Surface temperature anomaly variation over the years (globally)")
+   yearly_temp_change = df.groupby('year')['Surface temperature anomaly'].mean().reset_index()
+
+    fig1 = px.line(yearly_temp_change, x='year', y='Surface temperature anomaly',
+                  title='Average Surface temperature Anomaly Over the Years',
+                  labels={'year': 'Year', 'Surface temperature anomaly': 'Average Temperature Change (°C)'})
+   st.plotly_chart(fig1)
+
+   st.write("""
+   The chart shows the average surface temperature anomaly over the years. We observe an upward trend in temperature anomalies from 1850 to the present day. In the years before 1900, temperature anomalies were variable and often below zero, indicating cooler temperatures compared to the reference average. Starting from the mid-20th century, there is a gradual and consistent increase in temperature anomalies, with a significant acceleration in recent decades. This suggests an increasingly pronounced global warming trend.
+   """)
+   # 2) Average Temperature Change Over the Years by Continent
+   st.header("How the Surface temperature anomaly changed across the years per continent")
+   yearly_continent_temp_change = df.groupby(['year', 'Continent'])['Surface temperature anomaly'].mean().reset_index()
+
+
+   fig2 = px.line(yearly_continent_temp_change, x='year', y='Surface temperature anomaly',
+                  color='Continent', title='Average Temperature Change Over the Years by Continent',
+                  labels={'year': 'Year', 'Surface temperature anomaly': 'Average Temperature Change (°C)'})
+   st.plotly_chart(fig2)
+   st.write("""
+   The chart shows the surface temperature anomaly over the years by continent. Here are some key observations:
+   - Europe and Asia show higher temperature anomalies with slightly higher medians compared to other continents.
+   - Africa has a distribution more centered around zero, indicating less extreme variations in temperature anomalies.
+   - North America and South America show a wider distribution with more outliers, indicating greater variability in temperature anomalies.
+   - Oceania shows a distribution similar to Africa, with temperature anomalies mostly close to zero, but with some significant outliers.
+   """)
+
+   # 3) Surface Temperature Anomaly by Continent (Box Plot)
    st.header("Box Plot of Surface Temperature Anomaly by Continent")
-   image = Image.open("Box Plot of Surface Temperature Anomaly by Continent.png")
-   st.image(image)
-   """
+   fig3 = px.box(df, x='Continent', y='Surface temperature anomaly',
+                 title='Surface Temperature Anomaly by Continent',
+                 labels={'Continent': 'Continent', 'Surface temperature anomaly': 'Surface Temperature Anomaly (°C)'})
+   st.plotly_chart(fig3)
+   st.write("""
    The box plot chart shows the distribution of surface temperature anomalies for each continent. Here are some observations:
    - Europe and Asia show higher temperature anomalies, with slightly higher medians compared to other continents.
    - Africa has a distribution more centered around zero, indicating less extreme variations in temperature anomalies.
    - North America and South America show a wider distribution with more outliers, indicating greater variability in temperature anomalies.
    - Oceania shows a distribution similar to Africa, with temperature anomalies mostly close to zero, but with some significant outliers.
-
    This analysis helps in understanding the regional differences in temperature anomaly distributions across different continents.
-       """
+   """)
+
+   # 4) Average Temperature Change Over the Years by Continent
    st.header("Temperature change over the years by continents")
-   image = Image.open("temperature change over the years by continents.png")
-   st.image(image)
-   """ The chart shows the average temperature change over the years, divided by continent. We can observe that:
+   yearly_continent_temp_change_ghg = df.groupby(['year', 'Continent'])['temperature_change_from_ghg'].mean().reset_index()
+
+
+   fig4 = px.line(yearly_continent_temp_change_ghg, x='year', y='temperature_change_from_ghg',
+                  color='Continent', title='Average Temperature Change Over the Years by Continent',
+                  labels={'year': 'Year', 'temperature_change_from_ghg': 'Average Temperature Change (°C)'})
+   st.plotly_chart(fig4)
+   st.write("""
+   The chart shows the average temperature change over the years, divided by continent. We can observe that:
    - North America exhibits a significant increase in average temperature starting from the mid-19th century, with accelerated growth beginning in the 1950s.
    - Europe and Asia follow a similar pattern, with a steady increase in average temperature over time.
    - South America, Africa, and Oceania show less pronounced but still noticeable increases.
-
    Overall, all continents show a warming trend, with differences in the magnitude and period of warming acceleration.
-       """
+   """)
+
+   # 6) Reasons for Temperature Rise (Pie Chart)
    st.header("Pie Chart: Reasons for temperature rise")
-   image = Image.open("reasons for temperature rise.png")
-   st.image(image)
-   """
+   contributions = {
+       'Carbon Dioxide (CO2)': df['temperature_change_from_co2'].sum(),
+       'Methane (CH4)': df['temperature_change_from_ch4'].sum(),
+       'Nitrous Oxide (N2O)': df['temperature_change_from_n2o'].sum()
+   }
+   labels = list(contributions.keys())
+   sizes = list(contributions.values())
+
+   fig6 = go.Figure(data=[go.Pie(labels=labels, values=sizes, hole=.3)])
+   fig6.update_layout(title_text='Reasons for Temperature Rise')
+   st.plotly_chart(fig6)
+   st.write("""
    CO2: Significant focus for climate mitigation efforts due to its substantial contribution.
    Methane (CH4): Important to address due to its high warming potential, especially in agriculture and fossil fuels.
    N2O: Requires attention despite smaller contribution, particularly in agriculture.
-       """
-
-   st.header("Line Plot of tot CO2 emission by Top 5 Countries")
-   image = Image.open("Line Plot of tot CO2 emission by Top 5 Countries.png")
-   st.image(image)
-   """
-   The graph shows CO2 emissions over the years for the top 5 countries:
-   - China: Rapid increase starting in the late 1990s, becoming the highest emitter due to rapid industrialization.
-   - United States: Steady rise from the late 19th century, peaking around 2000, then slightly declining.
-   - Russia: Increase from the early 20th century, with significant rises post-1990.
-   - Germany: Steady increase until the 1970s, followed by a decline due to environmental regulations.
-   - United Kingdom: Early rise peaking mid-20th century, then a gradual decline.
-   """
-
-
+   """)
 
 def modeling():
     display_header()  # Call the function to display the header content
@@ -221,10 +196,10 @@ def modeling():
         st.title("Best performing model: Random Forest Regressor")
         image_mod = Image.open("model_performance_evaluation.png")
         st.image(image_mod)
-        st.write("- R²: The model achieves an R² score of 71.77%, indicating it explains a significant portion of the variance. When applied to the test data, the R² score drops to 52.33%, suggesting a decrease in performance and potential overfitting, as previously explained.")
-        st.write("- MAE: indicating the average deviation of the model's predictions from the actual surface temperature anomalies is 0.3233")
-        st.write("- MSE for the test data is 0.2046, representing the average of the squared differences between predicted and actual values, highlighting the impact of larger errors on the model’s performance.")
-        st.write("- RMSE for the test set is 0.4524, indicating the standard deviation of the prediction errors and showing how far the model’s predictions deviate from the actual values on average, providing a sense of accuracy relative to the target variable's units.")
+        st.write("- R²: The model achieves an R² score of 64,60%, indicating it explains a significant portion of the variance. When applied to the test data, the R² score drops to 47,36%, suggesting a decrease in performance and potential overfitting, as previously explained.")
+        st.write("- MAE: indicating the average deviation of the model's predictions from the actual surface temperature anomalies is 0,3419")
+        st.write("- MSE for the test data is 0.2260, representing the average of the squared differences between predicted and actual values, highlighting the impact of larger errors on the model’s performance.")
+        st.write("- RMSE for the test set is 0.4754, indicating the standard deviation of the prediction errors and showing how far the model’s predictions deviate from the actual values on average, providing a sense of accuracy relative to the target variable's units.")
    
     with st.expander("Feature Importances") :
         st.title("Feature Importances")
@@ -309,7 +284,6 @@ def prediction():
     'South Africa': 2,
     'Angola': 3,
     'Ethiopia': 4,
-
     'Japan': 5,
     'Indonesia': 6,
     'Bangladesh': 7,
@@ -333,8 +307,6 @@ def prediction():
     'Spain': 26,
     'Portugal': 27,
     'Fiji': 28
-    
-
  }
 
  # Dropdown for continent
@@ -344,8 +316,6 @@ def prediction():
  # Dropdown for country based on selected continent
     country_name = st.selectbox('Country', continent_to_countries[continent_name])
     country_encoded = country_mapping[country_name]
- 
-
 
  # Sliders to capture input values for each feature
     year = st.slider('Year', min_value=1851, max_value=2017, value=2020, step=1)  # Treated as an integer
@@ -357,7 +327,6 @@ def prediction():
         features = get_features(continent, country_encoded, year, population, co2)
         prediction = predict_surface_temperature(features)
         st.write(f"The predicted surface temperature is: {prediction[0]}°C")
-
 
 def conclusion():
    display_header()  # Call the function to display the header content
