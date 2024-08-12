@@ -100,8 +100,8 @@ def visualization():
     # 1) Average Surface temperature Anomaly Over the Years
    st.header("Surface temperature anomaly variation over the years (globally)")
    yearly_temp_change = df.groupby('year')['Surface temperature anomaly'].mean().reset_index()
-
-    fig1 = px.line(yearly_temp_change, x='year', y='Surface temperature anomaly',
+   
+   fig1 = px.line(yearly_temp_change, x='year', y='Surface temperature anomaly',
                   title='Average Surface temperature Anomaly Over the Years',
                   labels={'year': 'Year', 'Surface temperature anomaly': 'Average Temperature Change (°C)'})
    st.plotly_chart(fig1)
@@ -327,6 +327,38 @@ def prediction():
         features = get_features(continent, country_encoded, year, population, co2)
         prediction = predict_surface_temperature(features)
         st.write(f"The predicted surface temperature is: {prediction[0]}°C")
+
+        if country_name == 'Angola':
+            # Display a custom figure for Angola
+            st.subheader("Data for Angola")
+            data = {'Country': ['Angola'],
+                        'Year': ['2017'],
+                        'Population': ['30.208.634'] ,
+                        'CO2 Emissions': ['321.700'],
+                        'Surface Temperature Anomaly': ['1.22'] }
+            
+                        
+            dfangola = pd.DataFrame(data)
+            st.write(dfangola)
+            
+        elif country_name == 'Germany':
+            # Display a custom figure for Germany
+            st.subheader("Data for Germany")
+            data = {'Country': ['Germany'],
+                    'Year': ['2016'],
+                    'Population': ['82.331.432'],
+                    'CO2 Emissions': ['8.132.500'],
+                    'Surface Temperature Anomaly': ['1.45'] 
+                    }
+                        
+            
+            dfgermany = pd.DataFrame(data)
+            st.write(dfgermany)
+
+
+
+
+
 
 def conclusion():
    display_header()  # Call the function to display the header content
